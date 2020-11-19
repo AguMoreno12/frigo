@@ -1,10 +1,23 @@
 version: '3'
 services:
 
-  #Nginx Service
+  #PHP Service
+  app:
+    image: digitalocean.com/php
+    container_name: app
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www
+    networks:
+      - app-network
+
+ #Nginx Service
   webserver:
     image: nginx:alpine
-    container_name: frigoweb
+    container_name: webserver
     restart: unless-stopped
     tty: true
     ports:
